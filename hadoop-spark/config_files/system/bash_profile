@@ -55,3 +55,7 @@ addToPATH "${SPARK_HOME}/bin:${SPARK_HOME}/sbin"
 # HIVE
 export HIVE_HOME="${HOME}/hive"
 addToPATH "${HIVE_HOME}/bin"
+
+export KAFKA_HOME="/home/spark/kafka"
+export PATH="$PATH:$KAFKA_HOME/bin"
+export KAFKA_CLUSTER_ID="$($KAFKA_HOME/bin/kafka-storage.sh random-uuid)"

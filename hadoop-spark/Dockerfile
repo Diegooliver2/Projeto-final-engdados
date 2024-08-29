@@ -141,3 +141,10 @@ RUN chmod 0700 bootstrap.sh
 ENTRYPOINT ${MYDIR}/bootstrap.sh
 CMD HADOOP
 # CMD HIVE
+
+RUN wget -nc https://archive.apache.org/dist/kafka/3.4.1/kafka_2.12-3.4.1.tgz
+RUN tar -xzvf kafka_2.12-3.4.1.tgz && mv kafka_2.12-3.4.1 ~/kafka
+
+RUN mkdir ~/kafka/connect
+RUN wget -nc https://repo1.maven.org/maven2/io/debezium/debezium-connector-postgres/2.3.0.Final/debezium-connector-postgres-2.3.0.Final-plugin.tar.gz -P ~/kafka/connect
+RUN tar -xzvf ~/kafka/connect/debezium-connector-postgres-2.3.0.Final-plugin.tar.gz -C ~/kafka/connect/
