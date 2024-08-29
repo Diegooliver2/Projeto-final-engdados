@@ -1,0 +1,7 @@
+- A configuração do ambiente para executar o Spark
+- A configuração do ambiente para executar o Kafka
+- A configuração do ambiente para executar o Postgres
+- A configuração do ambiente para executar o Debizium
+
+- Um script (filltable.py) de leitura do csv e o salva em uma tablea do posgres que está sendo monitorada pelo debizium + Kafka
+- Um script que ler o tópico do kafka, faz uma filtragem e salva em outra tabela do postgres.
