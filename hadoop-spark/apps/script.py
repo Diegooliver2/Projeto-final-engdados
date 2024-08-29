@@ -27,10 +27,11 @@ schema = StructType([
     ]))
 ])
 
-dx = df.select(from_json(df.value.cast("string"), schema).alias("data")).select("data.payload.after.*")
+stringDF = df.selectExpr("CAST(value AS STRING)")
+
+dx = stringDF.select(from_json(col("value"), schema).alias("saida")).select("saida.payload.after.*")
 
 dff = dx.filter((col("Radius(R/Ro)") >= 1) & (col("Star color") == 'Blue')) # Estrelas azuis maiores que o sol
-
 
 def salva_postgresql(df, epoch_id):
     df.write.jdbc(
@@ -47,5 +48,5 @@ def salva_postgresql(df, epoch_id):
 
 dfx = dff.writeStream \
     .foreachBatch(salva_postgresql) \
-    .option("checkpointLocation", "/home/spark/apps/user/spark/checkpoint") \
-    .start()
+    .start() \
+    .awaitTermination()
